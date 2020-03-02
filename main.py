@@ -10,6 +10,7 @@ from datetime import datetime
 from datetime import timedelta
 import scheduler
 
+
 app = Flask('app')
 mongo_client = pymongo.MongoClient(s.ATLAS_CONNECTION_STRING)
 db = mongo_client['Ethofier']
