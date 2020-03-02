@@ -20,4 +20,4 @@ def send_notification(id, title, link):
         parse_mode='Markdown')
 
 
-log_message('Hello there. Up and running!')
+# log_message('Hello there. Up and running!')

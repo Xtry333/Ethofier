@@ -18,7 +18,7 @@ db = mongo_client['Ethofier']
 
 def request_subscription(channel, sub_mode=True):
     subscribe_url = 'https://pubsubhubbub.appspot.com/subscribe'
-    callback_url = 'https://ethofier.xtry333.repl.co/notification'
+    callback_url = s.HOST_URL + 'notification'
     data = {
         'hub.callback': callback_url,
         'hub.topic': s.CHANNEL_URL % channel,
