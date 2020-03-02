@@ -91,9 +91,13 @@ def notification():
     video_id = root.find('./atom:entry/yt:videoId', s.NAMESPACES).text
     video_link = root.find('./atom:entry/atom:link', s.NAMESPACES).get('href')
     video_title = root.find('./atom:entry/atom:title', s.NAMESPACES).text
-    bot.send_notification(video_id, video_title, video_link)
-    return 'Notification Received.'
 
+    if (not db.Notifications.find_one({'video_id': video_id})):
+        db.Notifications.insert_one({'video_id': video_id})
+        bot.send_notification(video_id, video_title, video_link)
+        return 'Notification Received, sent to Telegram channel.'
+    else:
+        return 'Notification Received and ignored.'
 
 @app.route('/subscribe')
 def subscribe():
