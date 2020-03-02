@@ -1,0 +1,6 @@
+flask
+telegram
+telegram.ext
+python-telegram-bot
+pymongo
+apscheduler
