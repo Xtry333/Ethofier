@@ -20,4 +20,10 @@ def send_notification(id, title, link):
         parse_mode='Markdown')
 
 
+def send_simple_notification(id, title, link):
+    msg = '*' + title + '*\n' + link
+    bot.send_message(
+        s.NOTIFICATIONS_CHAT_ID, msg,
+        parse_mode='Markdown')
+
 # log_message('Hello there. Up and running!')
