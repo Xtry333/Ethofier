@@ -94,16 +94,14 @@ def notification():
 
     bot.log_message('POST Notification of %s.' % video_id)
 
-    try: 
-        if (not db.Notifications.find_one({'video_id': video_id, notification: None })):
-            db.Notifications.insert_one({'video_id': video_id, 'video_title': video_title, 'video_link': video_link})
-            bot.send_notification(video_id, video_title, video_link)
-            db.Notifications.update_one({'video_id': video_id}, {'notification': True})
-            return 'Notification Received, sent to Telegram channel.'
-        else:
-            return 'Notification Received and ignored.'
-    except:
+    if (not db.Notifications.find_one({'video_id': video_id, 'notification': False })):
+        db.Notifications.insert_one({'video_id': video_id, 'video_title': video_title, 'video_link': video_link, 'notification': False})
         bot.send_simple_notification(video_id, video_title, video_link)
+        db.Notifications.update_one({'video_id': video_id}, {'notification': True})
+        return 'Notification Received, sent to Telegram channel.'
+    else:
+        return 'Notification Received and ignored.'
+
 
 @app.route('/subscribe')
 def subscribe():
